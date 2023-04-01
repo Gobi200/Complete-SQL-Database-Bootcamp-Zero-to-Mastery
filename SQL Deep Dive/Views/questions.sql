@@ -5,6 +5,11 @@
 */
 
 CREATE VIEW "90-95" AS
+select * from employees 
+where EXTRACT(year from hire_date) BETWEEN 1990 and 1995
+order by emp_no;
+
+
 -- ...
 
 /*
@@ -13,5 +18,12 @@ CREATE VIEW "90-95" AS
 *  Database: Employees
 */
 
-CREATE VIEW "bigbucks" AS
+CREATE VIEW "bigbucks" AS 
+select  a.emp_no,max(b.salary) 
+from employees as a 
+join salaries as b using (emp_no)
+where b.salary > 80000
+group by emp_no
+order by emp_no;
+
 -- ...
